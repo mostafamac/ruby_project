@@ -1,5 +1,15 @@
 class ArticlesController < ApplicationController
     include ArticlesHelper
+    before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
+    
+#    before_filter :require_login, except: [:new,:create,:edit,:update,:destroy]
+#    def zero_authors_or_authenticated
+#      unless Author.count == 0 || current_user
+#        redirect_to root_path
+#        return false
+#      end
+#    end
+    
     def index
       @articles = Article.all
     end
@@ -46,5 +56,6 @@ class ArticlesController < ApplicationController
         
         redirect_to articles_path
     end
+
     
 end
